@@ -2,6 +2,7 @@
 
 {% block content %}
 	
+
 	<form class="form-signin" action="" method="post" name="registration">
 		{{ form.hidden_tag() }}
 
@@ -10,17 +11,20 @@
         <label for="inputFirst" class="sr-only">First Name</label>
         {{ form.first(size=80, id="inputEmail", class="form-control", placeholder="First Name") }}
 
-        <label for="inputLast" class="sr-only">Last Name</label>
+        <label for="inputFirst" class="sr-only">Last Name</label>
         {{ form.last(size=80, id="inputEmail", class="form-control", placeholder="Last Name") }}
 
-        <label for="inputPhone" class="sr-only">Phone Number</label>
-        {{ form.phone(size=10, id="inputEmail", class="form-control", placeholder="Phone Number")}}
+        <label for="inputLast" class="sr-only">Last Name</label>
+        {{ form.username(size=80, id="inputEmail", class="form-control", placeholder="Username") }}
 
         <label for="inputEmail" class="sr-only">Email address</label>
-        {{ form.username(size=80, id="inputEmail", class="form-control", placeholder="Email address") }}
+        {{ form.email(size=80, id="inputEmail", class="form-control", placeholder="Email address") }}
 
         <label for="inputPassword" class="sr-only">Password</label>
         {{ form.password(size=80, id="inputPassword", class="form-control", placeholder="Password") }}
+
+        <label for="inputStatus" class="sr-only">Are you a customer or a provider?</label>
+        {{ form.status(id="inputStatus", class="form-control") }}
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 

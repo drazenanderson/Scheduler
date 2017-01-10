@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<div class="jumbotron">
+        <h1>Welcome {{ user.username }}</h1>
+        <p>This is a scheduling app to facilitate scheduling appointments. Please select a date, then check the times you are available.</p>
+    </div>
+
+    <div class="col-sm-4">
+	    <div class="list-group">
+
+	{% for name, timeline in matches %}
+
+	        <a href="#" class="list-group-item active">
+		        <h4 class="list-group-item-heading">{{ name }}</h4>
+		        <p class="list-group-item-text">Available: {{ timeline[0] }}-{{ timeline[-1] }}</p>
+	        </a>
+
+	{% endfor %}
+
+	    </div>
+    </div><!-- /.col-sm-4 -->
+
+{% endblock %}

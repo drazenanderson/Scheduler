@@ -1,19 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	    <ul class=flashes>
+	    {% for message in messages %}
+	        <li>{{ message }}</li>
+	    {% endfor %}
+	    </ul>
+	{% endif %}
+{% endwith %}
+	
 	<div class="jumbotron">
-        <h1>Scheduler</h1>
-        <p>This is a scheduling app to facilitate scheduling appointments.</p>
+        <h1>Welcome {{ user.username }}</h1>
+        <p>This is a scheduling app to facilitate scheduling appointments. Please select a date, then check the times you are available.</p>
     </div>
 
 	<div class="month"> 
 		<ul>
-		    <li class="prev">&#10094;</li>
-		    <li class="next">&#10095;</li>
+			{% if month < 1 %}
+				<li class="prev"><a href="/index/11/{{ year - 1 }}">&#10094;</a></li>
+			{% else %}
+		    	<li class="prev"><a href="/index/{{ month - 1 }}">&#10094;</a></li>
+			{% endif %}
+
+			{% if month > 10 %}
+		    	<li class="next"><a href="/index/0/{{ year + 1 }}">&#10095;</a></li>
+			{% else %}
+				<li class="next"><a href="/index/{{ month + 1 }}">&#10095;</a></li>
+			{% endif %}
+
 		    <li>
-		      	August<br>
-		      	<span style="font-size:18px">2016</span>
+		      	{{ monthinfo[0] }}<br>
+		      	<span style="font-size:18px">{{ year }}</span>
 		    </li>
+
 		</ul>
 	</div>
 
@@ -27,37 +48,15 @@
 		<li>Su</li>
 	</ul>
 
-	<ul class="days"> 
-		<li>1</li>
-		<li>2</li>
-		<li>3</li>
-		<li>4</li>
-		<li>5</li>
-		<li>6</li>
-		<li>7</li>
-		<li>8</li>
-		<li>9</li>
-		<li>10</li>
-		<li>11</li>
-		<li>12</li>
-		<li>13</li>
-		<li>14</li>
-		<li>15</li>
-		<li>16</li>
-		<li>17</li>
-		<li>18</li>
-		<li>19</li>
-		<li>20</li>
-		<li>21</li>
-		<li>22</li>
-		<li>23</li>
-		<li>24</li>
-		<li>25</li>
-		<li>26</li>
-		<li>27</li>
-		<li>28</li>
-		<li>29</li>
-		<li>30</li>		
+	<ul class="days unselected"> 
+	{% for i in range(monthinfo[2]) %}
+		<li></li>
+	{% endfor %}
+
+	{% for i in range(monthinfo[1]) %}
+		<li class="date">{{ i + 1 }}</li>
+	{% endfor %}
+
 	</ul>
 
 	<br />
@@ -65,23 +64,48 @@
 
 
 
-	<ul class="times">
-		<li>9:00</li>
-		<li>9:30</li>
-		<li>10:00</li>
-		<li>10:30</li>
-		<li>11:00</li>
-		<li>11:30</li>
-		<li>12:00</li>
-		<li>1:00</li>
-		<li>1:30</li>
-		<li>2:00</li>
-		<li>2:30</li>
-		<li>3:00</li>
-		<li>3:30</li>
-		<li>4:00</li>
-		<li>4:30</li>
-		<li>5:00</li>
-	</ul>
+	<form action="" method="post" name="window">
+		<div class="times hidden">
+			<div class="timeselect">
+				Select times you are available on {{ monthinfo[0] }} <span class="selection"></span>, {{ year }}:<br>
+			</div>
+			{{ form.day(class="selection", style="display:none") }}
+			{{ form.first(id="first") }}
+			<label class="slot" for="first">9:00 am</label>
+			{{ form.second(id="second") }}
+			<label class="slot" for="second">9:30 am</label>
+			{{ form.third(id="third") }}
+			<label class="slot" for="third">10:00 am</label>
+			{{ form.third(id="fourth") }}
+			<label class="slot" for="fourth">10:30 am</label>
+			{{ form.third(id="fifth") }}
+			<label class="slot" for="fifth">11:00 am</label>
+			{{ form.third(id="sixth") }}
+			<label class="slot" for="sixth">11:30 am</label>
+			{{ form.third(id="seventh") }}
+			<label class="slot" for="seventh">12:00 pm</label>
+			{{ form.third(id="eighth") }}
+			<label class="slot" for="eighth">12:30 pm</label>
+			{{ form.third(id="ninth") }}
+			<label class="slot" for="ninth">1:00 pm</label>
+			{{ form.third(id="tenth") }}
+			<label class="slot" for="tenth">1:30 pm</label>
+			{{ form.third(id="eleventh") }}
+			<label class="slot" for="eleventh">2:00 pm</label>
+			{{ form.third(id="twelfth") }}
+			<label class="slot" for="twelfth">2:30 pm</label>
+			{{ form.third(id="thirteenth") }}
+			<label class="slot" for="thirteenth">3:00 pm</label>
+			{{ form.third(id="fourteenth") }}
+			<label class="slot" for="fourteenth">3:30 pm</label>
+			{{ form.third(id="fifteenth") }}
+			<label class="slot" for="fifteenth">4:00 pm</label>
+			{{ form.third(id="sixteenth") }}
+			<label class="slot" for="sixteenth">4:30 pm</label>
+
+			<button class="btn btn-lg btn-primary btn-block windowbtn" type="submit">Submit</button>
+		</div>
+	</form>
+
 
 {% endblock %}

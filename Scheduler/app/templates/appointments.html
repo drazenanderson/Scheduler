@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	<div class="jumbotron">
+        <h1>{{ user.username }}'s appointments</h1>
+        <p>Here are your availabilities compared against others.</p>
+    </div>
+
+    <div class="col-sm-4">
+	    <div class="list-group">
+
+	    	{% for window in user.windows %}
+
+		    	<a href="#" class="list-group-item active">
+			        <h4 class="list-group-item-heading">{{ user.username }}</h4>
+			        <p class="list-group-item-text">Available: {{ window }}</p>
+		        </a>
+
+		    {% endfor %}
+
+		</div>
+	</div>
+
+	{% for other in others %}
+
+		<div class="col-sm-4">
+			<div class="list-group">
+
+			    {% for window in other.windows %}
+
+				    <a href="#" class="list-group-item active">
+					    <h4 class="list-group-item-heading">{{ other.username }}</h4>
+					    <p class="list-group-item-text">Available: {{ window }}</p>
+				    </a>
+
+				{% endfor %}
+
+			</div>
+		</div>
+
+	{% endfor %}
+
+{% endblock %}

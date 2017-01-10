@@ -25,6 +25,7 @@ body {font-family: Verdana, sans-serif;}
 .month .prev {
     float: left;
     padding-top: 10px;
+    margin-right: 20px;
 }
 
 /* Next button */
@@ -69,25 +70,73 @@ body {font-family: Verdana, sans-serif;}
 }
 
 /* Highlight the "current" day */
-.days li .active {
+.activeday {
     padding: 5px;
-    background: #1abc9c;
+    background: #969191;
     color: white !important
 }
 
-.times li:hover, .days li:hover {
+.times label:hover, .date:hover {
     background: #969191;
+    color: #777;
 }
 
-.times li {
-    width: 5.9%;
-    padding: 10px;   
+.inactive:hover {
+    background: #eee;
+}
+
+.times label {
+    width: 6.25137%;
+    padding: 20px;
+    float: left;   
 }
 
 .times {
     padding: 0px;
+    overflow: hidden;
+    margin-bottom: 150px;
 }
 
 .hidden {
     display: none;
+}
+
+.slot {
+    margin: 0;
+    text-align: center;
+}
+
+a, a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.times .slot {
+    display: inline-block;
+}
+
+.times input[type=checkbox] {
+    display: none;
+}
+
+.times input[type=checkbox]:checked + .slot {
+    background-color: #969191;
+    color: white;
+}
+
+.timeselect {
+    padding: 30px 25px;
+    color: white;
+    font-size: 16pt;
+    background: #1abc9c;
+}
+
+.windowbtn {
+    background-color: #1abc9c;
+    border-radius: 0;
+    border: 0;
+} 
+
+.unselected {
+    margin-bottom: 100px;
 }

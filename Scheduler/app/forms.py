@@ -14,7 +14,24 @@ class UserForm(Form):
 	email = StringField('email', validators=[DataRequired()])
 	first = StringField('first', validators=[DataRequired()])
 	last = StringField('last', validators=[DataRequired()])
-	phone = StringField('phone', validators=[DataRequired()])
+	status = SelectField('status', choices=[('customer', 'Customer'), ('client', 'Client')], validators=[DataRequired()])
 
 
-	
+class WindowForm(Form):
+	day = StringField('day')
+	first = BooleanField('first')
+	second = BooleanField('second')
+	third = BooleanField('third')
+	fourth = BooleanField('fourth')
+	fifth = BooleanField('fifth')
+	sixth = BooleanField('sixth')
+	seventh = BooleanField('seventh')
+	eighth = BooleanField('eighth')
+	ninth = BooleanField('ninth')
+	tenth = BooleanField('tenth')
+	eleventh = BooleanField('eleventh')
+	twelfth = BooleanField('twelfth')
+	thirteenth = BooleanField('thirteenth')
+	fourteenth = BooleanField('fourteenth')
+	fifteenth = BooleanField('fifteenth')
+	sixteenth = BooleanField('sixteenth')

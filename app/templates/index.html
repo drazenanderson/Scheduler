@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	    <ul class=flashes>
+	    {% for message in messages %}
+	        <li>{{ message }}</li>
+	    {% endfor %}
+	    </ul>
+	{% endif %}
+{% endwith %}
+	
+	<div class="jumbotron">
+        <h1>Welcome {{ user.username }}</h1>
+        <p>This is a scheduling app to facilitate scheduling appointments. Please select a date, then check the times you are available.</p>
+    </div>
+
+	<div class="month"> 
+		<ul>
+			{% if month < 1 %}
+				<li class="prev"><a href="/index/11/{{ year - 1 }}">&#10094;</a></li>
+			{% else %}
+		    	<li class="prev"><a href="/index/{{ month - 1 }}/{{ year }}">&#10094;</a></li>
+			{% endif %}
+
+			{% if month > 10 %}
+		    	<li class="next"><a href="/index/0/{{ year + 1 }}">&#10095;</a></li>
+			{% else %}
+				<li class="next"><a href="/index/{{ month + 1 }}/{{ year }}">&#10095;</a></li>
+			{% endif %}
+
+		    <li>
+		      	{{ monthinfo[0] }}<br>
+		      	<span style="font-size:18px">{{ year }}</span>
+		    </li>
+
+		</ul>
+	</div>
+
+	<ul class="weekdays">
+		<li>Mo</li>
+		<li>Tu</li>
+		<li>We</li>
+		<li>Th</li>
+		<li>Fr</li>
+		<li>Sa</li>
+		<li>Su</li>
+	</ul>
+
+	<ul class="indexdays unselected"> 
+	{% for i in range(monthinfo[2]) %}
+		<li></li>
+	{% endfor %}
+
+	{% for i in range(monthinfo[1]) %}
+		<li class="date">{{ i + 1 }}</li>
+	{% endfor %}
+
+	</ul>
+
+	<br />
+	<br />
+
+
+
+	<form action="" method="post" name="window">
+		{{ form.hidden_tag() }}
+		<div class="times hidden">
+			<div class="timeselect">
+				Select times you are available on {{ monthinfo[0] }} <span class="selection"></span>, {{ year }}:<br>
+			</div>
+			{{ form.day(class="selection", style="display:none") }}
+			{{ form.first(id="first", value="True") }}
+			<label class="slot" for="first">9:00 <br />am</label>
+			{{ form.second(id="second", value="True") }}
+			<label class="slot" for="second">9:30 <br />am</label>
+			{{ form.third(id="third", value="True") }}
+			<label class="slot" for="third">10:00 <br />am</label>
+			{{ form.fourth(id="fourth", value="True") }}
+			<label class="slot" for="fourth">10:30 <br />am</label>
+			{{ form.fifth(id="fifth", value="True") }}
+			<label class="slot" for="fifth">11:00 <br />am</label>
+			{{ form.sixth(id="sixth", value="True") }}
+			<label class="slot" for="sixth">11:30 <br />am</label>
+			{{ form.seventh(id="seventh", value="True") }}
+			<label class="slot" for="seventh">12:00 <br />pm</label>
+			{{ form.eighth(id="eighth", value="True") }}
+			<label class="slot" for="eighth">12:30 <br />pm</label>
+			{{ form.ninth(id="ninth", value="True") }}
+			<label class="slot" for="ninth">1:00 <br />pm</label>
+			{{ form.tenth(id="tenth", value="True") }}
+			<label class="slot" for="tenth">1:30 <br />pm</label>
+			{{ form.eleventh(id="eleventh", value="True") }}
+			<label class="slot" for="eleventh">2:00 <br />pm</label>
+			{{ form.twelfth(id="twelfth", value="True") }}
+			<label class="slot" for="twelfth">2:30 <br />pm</label>
+			{{ form.thirteenth(id="thirteenth", value="True") }}
+			<label class="slot" for="thirteenth">3:00 <br />pm</label>
+			{{ form.fourteenth(id="fourteenth", value="True") }}
+			<label class="slot" for="fourteenth">3:30 <br />pm</label>
+			{{ form.fifteenth(id="fifteenth", value="True") }}
+			<label class="slot" for="fifteenth">4:00 <br />pm</label>
+			{{ form.sixteenth(id="sixteenth", value="True") }}
+			<label class="slot" for="sixteenth">4:30 <br />pm</label><br />
+			{{ form.status(id="status", value="True") }}
+			<label id="lastslot" class="slot" for="status">Check here if you are a client looking for customers.</label>
+
+			<button class="btn btn-lg btn-primary btn-block windowbtn" type="submit">Submit</button>
+		</div>
+	</form>
+
+
+{% endblock %}

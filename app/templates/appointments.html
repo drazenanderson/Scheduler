@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	<div class="jumbotron">
+        <h1>{{ user.username }}'s appointments</h1>
+        <p>Here are your availabilities compared against others.</p>
+    </div>
+
+
+    <div class="month"> 
+		<ul>
+			{% if month < 1 %}
+				<li class="prev"><a href="/appointments/11/{{ year - 1 }}">&#10094;</a></li>
+			{% else %}
+		    	<li class="prev"><a href="/appointments/{{ month - 1 }}/{{ year }}">&#10094;</a></li>
+			{% endif %}
+
+			{% if month > 10 %}
+		    	<li class="next"><a href="/appointments/0/{{ year + 1 }}">&#10095;</a></li>
+			{% else %}
+				<li class="next"><a href="/appointments/{{ month + 1 }}/{{ year }}">&#10095;</a></li>
+			{% endif %}
+
+		    <li>
+		      	{{ monthinfo[0] }}<br>
+		      	<span style="font-size:18px">{{ year }}</span>
+		    </li>
+
+		</ul>
+	</div>
+
+	<ul class="weekdays">
+		<li>Mo</li>
+		<li>Tu</li>
+		<li>We</li>
+		<li>Th</li>
+		<li>Fr</li>
+		<li>Sa</li>
+		<li>Su</li>
+	</ul>
+
+	<ul class="days unselected"> 
+	{% for i in range(monthinfo[2]) %}
+		<li></li>
+	{% endfor %}
+
+	{% for i in range(monthinfo[1]) %}
+
+		{% if day and (i + 1) == day %}
+
+			<a name="anchor" href="/appointments/{{ month }}/{{ year }}/{{ i + 1 }}#anchor"><li class="date activeday">{{ i + 1 }}</li></a>
+
+		{% else %}
+
+			<a name="anchor" href="/appointments/{{ month }}/{{ year }}/{{ i + 1 }}#anchor"><li class="date">{{ i + 1 }}</li></a>
+
+		{% endif %}
+
+	{% endfor %}
+
+	</ul>
+
+	<br />
+	<br />
+
+
+
+	{% if day  %}
+
+		<div class="col-md-6 cute-table">
+
+	{% else %}
+
+		<div class="col-md-6 cute-table hidden">
+
+	{% endif %}
+
+	        <table class="table table-bordered table-striped ">
+	            <thead>
+	                <tr class="appointments">
+	                	<th>Username</th>
+	                	<th>Date</th>
+						<th>9:00<br /> am</th>
+						<th>9:30 <br /> am</th>
+						<th>10:00<br />  am</th>
+						<th>10:30<br />  am</th>
+						<th>11:00<br />  am</th>
+						<th>11:30<br />  am</th>
+						<th>12:00<br />  pm</th>
+						<th>12:30<br />  pm</th>
+						<th>1:00 <br /> pm</th>
+						<th>1:30<br />  pm</th>
+						<th>2:00<br />  pm</th>
+						<th>2:30<br />  pm</th>
+						<th>3:00<br />  pm</th>
+						<th>3:30<br />  pm</th>
+						<th>4:00<br />  pm</th>
+						<th>4:30<br />  pm</th>
+
+	                </tr>
+	            </thead>
+	            <tbody>
+
+	            {% if appointments %}
+
+		                <tr>
+		                	<td class="username">{{ user.username }} </td>
+		                	<td>{{ window.get_date() }}</td>
+
+		                		{% for block in window.list_notation() %}
+		                			<td>{{ block }}</td>
+
+		                		{% endfor %}
+
+		                </tr>
+
+
+
+
+		            {% for other in others %}
+
+				
+					    {% for window in other.windows %}
+					    <tr>
+
+					    	<td>{{ window.customer.parent.username }}</td>
+					    	<td>{{ window.get_date() }}</td>
+
+					    	{% for block in window.list_notation() %}
+
+					    		<td>{{ block }}</td>
+
+					    	{% endfor %}
+
+					    </tr>
+						{% endfor %}
+
+					{% endfor %}
+
+				{% endif %}
+	            </tbody>
+	        </table>
+	    </div>
+
+    
+
+	<div id="footer"></div>
+
+{% endblock %}

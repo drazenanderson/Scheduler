@@ -1,0 +1,173 @@
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+/* Month header */
+.month {
+    padding: 70px 25px;
+    width: 100%;
+    background: #1abc9c;
+}
+
+/* Month list */
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* Previous button inside month header */
+.month .prev {
+    float: left;
+    padding-top: 10px;
+    margin-right: 20px;
+}
+
+/* Next button */
+.month .next {
+    float: right;
+    padding-top: 10px;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays, .times {
+    margin: 0;
+    padding: 10px 0;
+    background-color:#ddd;
+}
+
+.weekdays li, .times li {
+    display: inline-block;
+    width: 13.75%;
+    color: #666;
+    text-align: center;
+}
+
+/* Days (1-31) */
+.days, .indexdays {
+    padding: 10px 0;
+    background: #eee;
+    margin: 0;
+    padding-top: 0px;
+}
+
+.days li, .indexdays li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.75%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size:12px;
+    color:#777;
+    height: 60px;
+    vertical-align: middle;
+    padding-top: 25px;
+}
+
+/* Highlight the "current" day */
+.activeday {
+    padding: 5px;
+    background: #969191;
+    color: white !important
+}
+
+.times label:hover, .date:hover {
+    background: #969191;
+    color: #777;
+}
+
+.inactive:hover {
+    background: #eee;
+}
+
+.times label {
+    width: 6.25137%;
+    padding: 20px 5px;
+    float: left;   
+    font-weight: 100;
+    text-align: center;
+}
+
+.times {
+    padding: 0px;
+    overflow: hidden;
+    margin-bottom: 150px;
+}
+
+.hidden {
+    display: none;
+}
+
+.slot {
+    margin: 0;
+    text-align: center;
+}
+
+#lastslot {
+    width: 100%;
+}
+
+a, a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.times .slot {
+    display: inline-block;
+}
+
+.times input[type=checkbox] {
+    display: none;
+}
+
+.times input[type=checkbox]:checked + .slot {
+    background-color: #969191;
+    color: white;
+}
+
+.timeselect {
+    padding: 30px 25px;
+    color: white;
+    font-size: 16pt;
+    background: #1abc9c;
+}
+
+.windowbtn {
+    background-color: #1abc9c;
+    border-radius: 0;
+    border: 0;
+} 
+
+.unselected {
+    margin-bottom: 100px;
+}
+
+#footer {
+    margin-bottom: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.cute-table {
+    width: 100%;
+}
+
+.appointments {
+    background-color: #eee;
+    color: #777;
+}
+
+.appointments th {
+    padding: 20px 5px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.username {
+    font-weight: 700;
+}

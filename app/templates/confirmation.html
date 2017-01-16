@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	    <ul class=flashes>
+	    {% for message in messages %}
+	        <li>{{ message }}</li>
+	    {% endfor %}
+	    </ul>
+	{% endif %}
+{% endwith %}
+
+	<div class="jumbotron">
+        <h1>Hi {{ user.username }}!!!</h1>
+        <p>The following are compatible users and their hours of availability for {{ month }} {{ day }}, {{ year }}</p>
+    </div>
+
+    <div class="col-sm-4">
+	    <div class="list-group">
+
+	{% if matches %}
+
+		{% for k, v in matches.items() %}
+
+			{% if k != 'No match' %}
+
+		        <a href="#" class="list-group-item">
+
+			        <h4 class="list-group-item-heading">{{ k }}</h4>
+
+			        {% for span in v %}
+
+			        	<p class="list-group-item-text">Available: {{ span[0] }} - {{ span[-1] }}</p>
+
+			        {% endfor %}
+
+		        </a>
+
+		    {% endif %}
+
+		{% endfor %}
+
+	{% else %}
+
+		<a href="#" class="list-group-item ">
+			<h4 class="list-group-item-heading">No matches found yet.</h4>
+		</a>
+
+	{% endif %}
+
+
+
+	    </div>
+    </div><!-- /.col-sm-4 -->
+
+{% endblock %}

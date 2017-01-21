@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	    <ul class=flashes>
+	    {% for message in messages %}
+	        <li>{{ message }}</li>
+	    {% endfor %}
+	    </ul>
+	{% endif %}
+{% endwith %}
+	
+	<div class="jumbotron">
+        <h1>Welcome {{ user.username }}</h1>
+        <p>This is a scheduling app to facilitate scheduling appointments. Just select a date and the time you will be available on that date!</p>
+    </div>
+
+	<div class="month"> 
+		<ul>
+			{% if month %}
+				<li class="prev"><a href="/index/11/{{ year - 1 }}">&#10094;</a></li>
+			{% else %}
+		    	<li class="prev"><a href="/index/{{ month - 1 }}/{{ year }}">&#10094;</a></li>
+			{% endif %}
+
+			{% if month > 10 %}
+		    	<li class="next"><a href="/index/0/{{ year + 1 }}">&#10095;</a></li>
+			{% else %}
+				<li class="next"><a href="/index/{{ month + 1 }}/{{ year }}">&#10095;</a></li>
+			{% endif %}
+
+		    <li>
+		      	{{ monthinfo[0] }}<br>
+		      	<span style="font-size:18px">{{ year }}</span>
+		    </li>
+
+		</ul>
+		
+		<form action="" method="post" name="window" class="form-inline">
+			{{ form.hidden_tag() }}
+			
+			<div class="form-group">
+	
+				{{ form.day(class="selection", style="display:none") }}
+				{{ form.starthour(class="form-control input-sm") }}:{{ form.startminutes(class="form-control input-sm") }} 
+				{{ form.ampm1(class="form-control input-sm") }} - {{ form.endhour(class="form-control input-sm") }}:
+				{{ form.endminutes(class="form-control input-sm") }} {{ form.ampm2(class="form-control input-sm") }}
+			</div>
+			
+		</form>
+	</div>
+
+	<ul class="weekdays">
+		<li>Mo</li>
+		<li>Tu</li>
+		<li>We</li>
+		<li>Th</li>
+		<li>Fr</li>
+		<li>Sa</li>
+		<li>Su</li>
+	</ul>
+
+	<ul class="indexdays unselected"> 
+	{% for i in range(monthinfo[2]) %}
+		<li></li>
+	{% endfor %}
+
+	{% for i in range(monthinfo[1]) %}
+		<li class="date">{{ i + 1 }}</li>
+	{% endfor %}
+
+	</ul>
+
+	<br />
+	<br />
+
+
+
+	<form action="" method="post" name="window">
+		{{ form.hidden_tag() }}
+		<div class="times hidden">
+			<div class="timeselect">
+				Select times you are available on {{ monthinfo[0] }} <span class="selection"></span>, {{ year }}:<br>
+			</div>
+			{{ form.day(class="selection", style="display:none") }}
+			{{ form.starthour }}:{{ form.startminutes }} {{ form.ampm1 }} - {{ form.endhour }}:{{ form.endminutes }} {{ form.ampm2 }}
+			
+		</div>
+	</form>
+
+
+{% endblock %}
